@@ -18,7 +18,7 @@ module DragonflyMysql
         template "model.rb", "app/models/dragonfly_data_store.rb"
       end
 
-      def create_migration
+      def copy_migration
         migration_template "migration.rb", "db/migrate/create_dragonfly_data_stores.rb"
       end
 

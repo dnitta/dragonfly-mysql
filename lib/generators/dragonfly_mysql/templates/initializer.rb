@@ -34,4 +34,3 @@ Rails.application.middleware.insert 0, Rack::Cache, {
 Rails.application.middleware.insert_after Rack::Cache, Dragonfly::Middleware, :images
 
 app.datastore = Dragonfly::DataStorage::MysqlDataStore.new
-app.datastore.salt = ''
