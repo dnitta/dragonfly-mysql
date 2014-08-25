@@ -22,8 +22,13 @@ module DragonflyMysql
         migration_template "migration.rb", "db/migrate/create_dragonfly_data_stores.rb"
       end
 
-      def copy_initializer_file
-        copy_file "initializer.rb", "config/initializers/dragonfly.rb"
+      def modify_initializer_file
+        init_file_name = "config/initializers/dragonfly.rb"
+        init_file = File.read(init_file_name)
+        init_file.sub!(/datastore :file/, "datastore Dragonfly::DataStorage::MysqlDataStore.new\n  # datastore :file")
+        init_file.sub!(/  root_path:/, "#   root_path:")
+        init_file.sub!(/  server_root:/, "#   server_root:")
+        File.write(init_file_name, init_file)
       end
 
     end

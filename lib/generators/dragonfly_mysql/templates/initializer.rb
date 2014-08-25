@@ -12,7 +12,7 @@ rescue LoadError => e
 end
 
 ### The dragonfly app ###
-app = Dragonfly[:images]
+app = Dragonfly.app
 app.configure_with(:rails)
 app.configure_with(:imagemagick)
 

@@ -8,13 +8,13 @@ Gem::Specification.new do |s|
   s.name        = "dragonfly-mysql"
   s.version     = DragonflyMysql::VERSION
   s.authors     = ["Daisuke Nitta"]
-  s.email       = ["dnitta@email.com"]
+  s.email       = ["dnitta@live.jp"]
   s.homepage    = ""
   s.summary     = "Summary of DragonflyMysql."
   s.description = "Description of DragonflyMysql."
 
   s.files = Dir["{app,config,db,lib}/**/*", "MIT-LICENSE", "Rakefile", "README.rdoc"]
 
-  s.add_dependency "dragonfly"
+  s.add_dependency "dragonfly", "~> 1"
   s.add_dependency "mysql2"
 end

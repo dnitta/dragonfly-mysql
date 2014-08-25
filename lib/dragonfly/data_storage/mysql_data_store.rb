@@ -9,10 +9,10 @@ module Dragonfly
       SALT = nil
       HASH_LENGTH = 8
 
-      def store(temp_object, opts={})
+      def write(temp_object, opts={})
         id = CLASS_NAME.constantize.create! { |x|
           x.data = temp_object.data
-          x.meta = marshal_encode(temp_object.meta) if STORE_META
+          x.meta = marshal_b64_encode(temp_object.meta) if STORE_META
         }.id
         if SALT.blank?
           id
@@ -24,9 +24,9 @@ module Dragonfly
         raise UnableToStore, e.message
       end
 
-      def retrieve(uid)
+      def read(uid)
         record = CLASS_NAME.constantize.find(get_id(uid))
-        [record.data, STORE_META ? marshal_decode(record.meta) : {}]
+        [record.data, STORE_META ? marshal_b64_decode(record.meta) : {}]
       rescue ActiveRecord::ActiveRecordError => e
         raise DataNotFound, "couldn't find file #{uid}"
       end
