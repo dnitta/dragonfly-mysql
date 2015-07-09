@@ -15,7 +15,7 @@ module Dragonfly
           x.meta = marshal_b64_encode(temp_object.meta) if STORE_META
         }.id
         if SALT.blank?
-          id
+          id.to_s
         else
           require 'digest/sha1'
           "#{id}-#{Digest::SHA1.hexdigest(id.to_s + SALT)[0, HASH_LENGTH]}"
@@ -41,12 +41,12 @@ module Dragonfly
 
       def get_id(uid)
         if SALT.blank?
-          uid
+          uid.to_s
         else
           require 'digest/sha1'
           id, hash = uid.split('-', 2)
           if hash.blank? or hash == Digest::SHA1.hexdigest(id + SALT)[0, HASH_LENGTH]
-            id
+            id.to_s
           else
             nil
           end
